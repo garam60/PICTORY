@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory - 마이페이지</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('picory-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+</head>
+<body class="page-mypage">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+      </a>
+      <label class="nav__search" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="상품, 브랜드 검색">
+      </label>
+      <ul class="nav__menu">
+        <li><a href="index.html" class="nav__link">홈</a></li>
+        <li><a href="products.html" class="nav__link">상품</a></li>
+        <li><a href="recommend.html" class="nav__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="price.html" class="nav__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="checklist.html" class="nav__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="community.html" class="nav__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn btn--ghost btn--sm" id="bookmarkBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          북마크
+        </button>
+        <a href="auth.html" class="btn btn--primary btn--sm">로그인</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="mypage-wrap">
+    <div class="container">
+      <header class="mypage-header card">
+        <div class="mypage-profile">
+          <img class="mypage-profile__avatar" src="images/mypage-profile-default.svg" width="88" height="88" alt="프로필 이미지">
+          <div class="mypage-profile__meta">
+            <h1 id="mypageNickname">하늘필름</h1>
+          </div>
+        </div>
+      </header>
+
+      <nav class="mypage-tabs" aria-label="마이페이지 탭">
+        <button class="mypage-tab is-active" data-mypage-tab="home" type="button">홈</button>
+        <button class="mypage-tab" data-mypage-tab="recommend" type="button">내 추천</button>
+        <button class="mypage-tab" data-mypage-tab="bookmark" type="button">북마크</button>
+        <button class="mypage-tab" data-mypage-tab="archive" type="button">아카이브</button>
+        <button class="mypage-tab" data-mypage-tab="community" type="button">커뮤니티</button>
+        <button class="mypage-tab" data-mypage-tab="settings" type="button">설정</button>
+      </nav>
+
+      <div class="mypage-panel is-active" data-mypage-panel="home">
+        <section class="mypage-summary-grid">
+          <article class="mypage-stat card"><strong>최근 추천 결과</strong><span>Sony A7C II + FE 35mm F1.8</span></article>
+          <article class="mypage-stat card"><strong>시세 알림 수</strong><span>5건</span></article>
+          <article class="mypage-stat card"><strong>저장한 아카이브 수</strong><span>21개</span></article>
+          <article class="mypage-stat card"><strong>작성글 수</strong><span>18개</span></article>
+        </section>
+
+        <section class="mypage-section card">
+          <h2>추천 결과 요약</h2>
+          <div class="mypage-result-grid">
+            <article class="mypage-result">
+              <h3>최근 AI 추천</h3>
+              <p>Sony A7C II + FE 35mm F1.8</p>
+            </article>
+            <article class="mypage-result">
+              <h3>최근 체크리스트 추천</h3>
+              <p>Fujifilm X-S20 + XF 23mm F2</p>
+            </article>
+            <article class="mypage-result">
+              <h3>추천 이유 키워드</h3>
+              <p>휴대성 / 인물 표현 / 야간 저노이즈 / 빠른 AF</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="mypage-section card">
+          <h2>최근 활동 로그</h2>
+          <ul class="mypage-timeline" id="mypageTimeline"></ul>
+        </section>
+      </div>
+
+      <div class="mypage-panel" data-mypage-panel="recommend">
+        <section class="mypage-section card">
+          <h2>내 추천 상세</h2>
+          <p class="mypage-muted">최근 AI 추천 결과와 체크리스트 기반 결과를 모아봤어요.</p>
+          <div class="mypage-camera-grid">
+            <article class="mypage-camera-card">
+              <img src="images/sony-a6700-cutout.png" alt="Sony A6700">
+              <h3>Sony A6700</h3>
+              <p>APS-C / 빠른 AF / 4K 60p</p>
+              <div class="mypage-camera-meta"><span class="badge">추천중</span><strong>1,520,000원</strong></div>
+            </article>
+            <article class="mypage-camera-card">
+              <img src="images/fujifilm-x-s20-cutout.png" alt="Fujifilm X-S20">
+              <h3>Fujifilm X-S20</h3>
+              <p>필름 시뮬레이션 / 경량 바디</p>
+              <div class="mypage-camera-meta"><span class="badge">AI PICK</span><strong>1,780,000원</strong></div>
+            </article>
+            <article class="mypage-camera-card">
+              <img src="images/canon-eos-r50-cutout.png" alt="Canon EOS R50">
+              <h3>Canon EOS R50</h3>
+              <p>입문 최적 / 쉬운 조작</p>
+              <div class="mypage-camera-meta"><span class="badge">가성비</span><strong>980,000원</strong></div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="mypage-panel" data-mypage-panel="bookmark">
+        <section class="mypage-section card">
+          <h2>북마크</h2>
+          <p class="mypage-muted">마음에 드는 카메라를 북마크해 두고, 시세 알림·비교까지 한곳에서 이어서 볼 수 있어요.</p>
+          <div class="mypage-camera-grid">
+            <article class="mypage-camera-card">
+              <img src="images/fujifilm-x-s20.png" alt="Fujifilm X-S20">
+              <h3>Fujifilm X-S20</h3>
+              <p>북마크 · 색감 표현 우수</p>
+              <div class="mypage-camera-meta"><span class="badge">북마크</span><strong>1,780,000원</strong></div>
+            </article>
+            <article class="mypage-camera-card">
+              <img src="images/sony-a6700.png" alt="Sony A6700">
+              <h3>Sony A6700</h3>
+              <p>최근 본 카메라 · 추적 AF 강점</p>
+              <div class="mypage-camera-meta"><span class="badge">최근본</span><strong>1,520,000원</strong></div>
+            </article>
+            <article class="mypage-camera-card">
+              <img src="images/canon-eos-r50.png" alt="Canon EOS R50">
+              <h3>Canon EOS R50</h3>
+              <p>비교 중 · 입문 영상용</p>
+              <div class="mypage-camera-meta"><span class="badge">비교중</span><strong>980,000원</strong></div>
+            </article>
+            <article class="mypage-camera-card">
+              <img src="images/sony-a7c2-banner.png" alt="Sony A7C II">
+              <h3>Sony A7C II</h3>
+              <p>시세 알림 설정 · 170만원 이하</p>
+              <div class="mypage-camera-meta"><span class="badge">알림설정</span><strong>2,390,000원</strong></div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="mypage-panel" data-mypage-panel="archive">
+        <section class="mypage-section card">
+          <h2>아카이브 <span class="mypage-privacy-badge">나만 보기</span></h2>
+          <p class="mypage-muted">여기에 올린 사진·무드보드·레퍼런스는 <strong>본인만</strong> 볼 수 있는 비공개 공간이에요. 커뮤니티에 올리기 전까지 다른 사람에게는 보이지 않아요.</p>
+          <div class="mypage-archive-grid">
+            <article class="mypage-archive-card">
+              <img src="images/home-banner-1.png" alt="아카이브 이미지 1">
+              <p>#도심야경 #저노이즈 #A7C2</p>
+            </article>
+            <article class="mypage-archive-card">
+              <img src="images/home-banner-2.png" alt="아카이브 이미지 2">
+              <p>#스냅 #필름무드 #X100VI</p>
+            </article>
+            <article class="mypage-archive-card">
+              <img src="images/home-banner-3.png" alt="아카이브 이미지 3">
+              <p>#브이로그 #경량장비 #EOSR50</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="mypage-panel" data-mypage-panel="community">
+        <section class="mypage-section card">
+          <h2>커뮤니티 <span class="mypage-privacy-badge mypage-privacy-badge--public">전체 공개</span></h2>
+          <p class="mypage-muted">아카이브에 모아 둔 내용 중 <strong>공개로 전환한 항목</strong>이 여기 게시글로 올라가요. 일반 글·댓글·저장·좋아요 활동도 함께 모여 보여요.</p>
+          <ul class="mypage-list">
+            <li>아카이브에서 공개: “야간 스냅 샘플 (A7C II)”</li>
+            <li>내가 쓴 글: “여행용 카메라 추천 부탁드려요”</li>
+            <li>최근 댓글: “X-S20 색감이 정말 예쁘네요!”</li>
+            <li>저장한 게시글: 14개</li>
+            <li>좋아요한 후기: 29개</li>
+            <li>최근 활동 요약: 이번 주 활동 11회</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="mypage-panel" data-mypage-panel="settings">
+        <section class="mypage-section card">
+          <h2>설정</h2>
+          <div class="mypage-settings">
+            <button class="btn btn--outline">계정 설정</button>
+            <button class="btn btn--outline">알림 설정</button>
+            <button class="btn btn--outline">취향 재설정</button>
+            <button class="btn btn--primary" id="mypageLogoutBtn">로그아웃</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <aside class="bookmark-sidebar" id="bookmarkSidebar">
+    <div class="bookmark-sidebar__header">
+      <h3>내 북마크</h3>
+      <button class="bookmark-sidebar__close" id="closeSidebar" aria-label="닫기" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="bookmark-sidebar__body" id="bookmarkBody">
+      <div class="bookmark-empty" id="bookmarkEmpty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <p>아직 북마크한 카메라가 없어요.</p>
+        <p class="text-sm text-muted">마음에 드는 카메라의 북마크 버튼을 눌러보세요.</p>
+      </div>
+      <div class="bookmark-list hidden" id="bookmarkList"></div>
+    </div>
+    <div class="bookmark-sidebar__footer hidden" id="bookmarkFooter">
+      <button class="btn btn--primary" style="width: 100%;" id="compareBtn" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        선택한 카메라 비교하기
+      </button>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo footer__logo">
+            <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+          </a>
+          <p class="footer__tagline">카메라 탐색의 새로운 기준</p>
+        </div>
+        <div class="footer__theme" role="group" aria-label="화면 테마">
+          <span class="footer__theme-label">테마</span>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="light" aria-pressed="true">라이트</button>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="dark" aria-pressed="false">다크</button>
+        </div>
+        <p class="footer__copy">&copy; 2026 Picory. UX Design Project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="app.js"></script>
+  <script src="mypage.js"></script>
+</body>
+</html>

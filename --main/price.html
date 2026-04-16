@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory - 시세 비교</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('picory-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+</head>
+<body class="page-price">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+      </a>
+      <label class="nav__search" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="상품, 브랜드 검색">
+      </label>
+      <ul class="nav__menu">
+        <li><a href="index.html" class="nav__link">홈</a></li>
+        <li><a href="products.html" class="nav__link">상품</a></li>
+        <li><a href="recommend.html" class="nav__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="price.html" class="nav__link nav__link--active" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="checklist.html" class="nav__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="community.html" class="nav__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn btn--ghost btn--sm" id="bookmarkBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          북마크
+        </button>
+        <a href="auth.html" class="btn btn--primary btn--sm">로그인</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__list">
+      <li><a href="index.html" class="mobile-menu__link">홈</a></li>
+      <li><a href="products.html" class="mobile-menu__link">상품</a></li>
+      <li><a href="recommend.html" class="mobile-menu__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="price.html" class="mobile-menu__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="checklist.html" class="mobile-menu__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="community.html" class="mobile-menu__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="#" class="mobile-menu__link">북마크</a></li>
+    </ul>
+  </div>
+
+  <section class="section section--dark" id="price">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">통합 시세 비교</h2>
+        <p class="section__desc">흩어진 가격 정보를 한눈에. 당근, 중고나라, 번개장터, 공식 판매처를 실시간으로 모아봐요.</p>
+      </div>
+
+      <div class="price-search">
+        <div class="price-search__input-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="price-search__input" placeholder="카메라 모델명을 입력하세요 (예: Sony A7C II)" id="priceSearchInput">
+        </div>
+        <button class="btn btn--primary" id="priceSearchBtn">검색</button>
+      </div>
+
+      <div class="price-summary" id="priceSummary">
+        <div class="price-summary__card card">
+          <span class="price-summary__label">신품 최저</span>
+          <span class="price-summary__value" data-price-summary="new">1,890,000<small>원</small></span>
+          <span class="price-summary__source" data-price-summary-src="new">네이버 쇼핑 기준</span>
+        </div>
+        <div class="price-summary__card card">
+          <span class="price-summary__label">중고 평균</span>
+          <span class="price-summary__value price-summary__value--used" data-price-summary="used">1,420,000<small>원</small></span>
+          <span class="price-summary__source" data-price-summary-src="used">최근 30일 거래 기준</span>
+        </div>
+        <div class="price-summary__card card">
+          <span class="price-summary__label">예상 절약 금액</span>
+          <span class="price-summary__value price-summary__value--save" data-price-summary="save">470,000<small>원</small></span>
+          <span class="price-summary__source" data-price-summary-src="save">신품 대비 약 25% 절약</span>
+        </div>
+      </div>
+
+      <div class="price-list">
+        <div class="price-list__header">
+          <span class="price-list__col price-list__col--platform">플랫폼</span>
+          <span class="price-list__col price-list__col--title">상품명</span>
+          <span class="price-list__col price-list__col--condition">상태</span>
+          <span class="price-list__col price-list__col--price">가격</span>
+          <span class="price-list__col price-list__col--date">등록일</span>
+          <span class="price-list__col price-list__col--action"></span>
+        </div>
+
+        <div id="priceListResults"></div>
+      </div>
+
+      <div class="price-chart card">
+        <h3 class="price-chart__title">최근 7개월 중고 시세 추이</h3>
+        <div class="chart-container" id="chartContainer" aria-live="polite"></div>
+        <p class="price-chart__insight" id="priceChartInsight">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <span id="priceChartInsightText">검색된 중고 시세 추이를 확인해 보세요.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="bookmark-sidebar" id="bookmarkSidebar">
+    <div class="bookmark-sidebar__header">
+      <h3>내 북마크</h3>
+      <button class="bookmark-sidebar__close" id="closeSidebar" aria-label="닫기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="bookmark-sidebar__body" id="bookmarkBody">
+      <div class="bookmark-empty" id="bookmarkEmpty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <p>아직 북마크한 카메라가 없어요.</p>
+        <p class="text-sm text-muted">마음에 드는 카메라의 북마크 버튼을 눌러보세요.</p>
+      </div>
+      <div class="bookmark-list hidden" id="bookmarkList"></div>
+    </div>
+    <div class="bookmark-sidebar__footer hidden" id="bookmarkFooter">
+      <button class="btn btn--primary" style="width: 100%;" id="compareBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        선택한 카메라 비교하기
+      </button>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo footer__logo">
+            <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+          </a>
+          <p class="footer__tagline">카메라 탐색의 새로운 기준</p>
+        </div>
+        <div class="footer__links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">고객센터</a>
+        </div>
+        <div class="footer__theme" role="group" aria-label="화면 테마">
+          <span class="footer__theme-label">테마</span>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="light" aria-pressed="true">라이트</button>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="dark" aria-pressed="false">다크</button>
+        </div>
+        <p class="footer__copy">&copy; 2026 Picory. UX Design Project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="app.js"></script>
+  <script type="module" src="js/price/index.js"></script>
+</body>
+</html>

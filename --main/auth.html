@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory - 로그인</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('picory-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+</head>
+<body class="auth-page">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+      </a>
+      <label class="nav__search" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="상품, 브랜드 검색">
+      </label>
+      <ul class="nav__menu">
+        <li><a href="index.html" class="nav__link">홈</a></li>
+        <li><a href="products.html" class="nav__link">상품</a></li>
+        <li><a href="recommend.html" class="nav__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="price.html" class="nav__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="checklist.html" class="nav__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="community.html" class="nav__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn btn--ghost btn--sm" id="bookmarkBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          북마크
+        </button>
+        <a href="auth.html" class="btn btn--primary btn--sm">로그인</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__list">
+      <li><a href="index.html" class="mobile-menu__link">홈</a></li>
+      <li><a href="products.html" class="mobile-menu__link">상품</a></li>
+      <li><a href="recommend.html" class="mobile-menu__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="price.html" class="mobile-menu__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="checklist.html" class="mobile-menu__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="community.html" class="mobile-menu__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="#" class="mobile-menu__link">북마크</a></li>
+    </ul>
+  </div>
+
+  <div class="auth-shell">
+    <main class="auth-card card">
+      <div class="auth-card__header">
+        <a href="index.html" class="auth-login-logo">
+          <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+        </a>
+      </div>
+
+      <section class="auth-panel auth-panel--active" data-auth-panel="login">
+        <form class="auth-form" id="loginForm">
+          <label class="auth-field">
+            <span>아이디</span>
+            <input type="text" name="username" placeholder="아이디를 입력하세요" required>
+          </label>
+          <label class="auth-field">
+            <span>비밀번호</span>
+            <div class="auth-password-wrap">
+              <input type="password" name="password" placeholder="비밀번호를 입력하세요" required>
+              <button class="auth-password-toggle" type="button" data-password-toggle aria-label="비밀번호 보기 전환">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </label>
+          <div class="auth-row">
+            <a href="#" class="auth-link" data-open-signup>회원가입</a>
+            <a href="#" class="auth-link">아이디 찾기</a>
+            <a href="#" class="auth-link">비밀번호 찾기</a>
+          </div>
+          <button class="btn btn--primary btn--lg auth-submit" type="submit">로그인</button>
+        </form>
+
+        <div class="auth-socials auth-socials--bottom">
+          <button class="auth-social auth-social--naver" type="button" data-provider="네이버">
+            <span class="auth-social__icon">
+              <img src="images/icon-naver-login.png" alt="네이버 로고">
+            </span>
+            <span class="auth-social__label">네이버로 로그인</span>
+          </button>
+          <button class="auth-social auth-social--apple" type="button" data-provider="Apple">
+            <span class="auth-social__icon">
+              <img src="images/icon-apple-login.png" alt="애플 로고">
+            </span>
+            <span class="auth-social__label">Apple로 로그인</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="auth-panel" data-auth-panel="signup">
+        <form class="auth-signup-form" id="signupForm">
+          <h2 class="auth-signup__title">회원가입</h2>
+
+          <label class="auth-signup-field">
+            <span>아이디*</span>
+            <input type="text" name="signupId" placeholder="아이디를 입력하세요" required>
+          </label>
+
+          <label class="auth-signup-field">
+            <span>비밀번호*</span>
+            <div class="auth-password-wrap">
+              <input type="password" name="signupPassword" placeholder="비밀번호를 입력하세요" required>
+              <button class="auth-password-toggle" type="button" data-password-toggle aria-label="비밀번호 보기 전환">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <small>영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-20자)</small>
+          </label>
+
+          <label class="auth-signup-field">
+            <span>닉네임</span>
+            <input type="text" name="nickname" placeholder="닉네임을 입력하세요" required>
+          </label>
+
+          <div class="auth-signup-terms">
+            <label class="auth-signup-check auth-signup-check--all">
+              <input type="checkbox" name="agreeAll">
+              <span>모두 동의합니다</span>
+            </label>
+            <p class="auth-signup-terms__sub">선택 동의 항목 포함</p>
+
+            <label class="auth-signup-check">
+              <input type="checkbox" name="age" required>
+              <span>[필수] 만 14세 이상입니다</span>
+            </label>
+            <label class="auth-signup-check">
+              <input type="checkbox" name="termsRequired" required>
+              <span>[필수] 이용약관 동의</span>
+            </label>
+            <label class="auth-signup-check">
+              <input type="checkbox" name="privacyOptional">
+              <span>[선택] 개인 정보 수집 및 이용 동의</span>
+            </label>
+            <label class="auth-signup-check">
+              <input type="checkbox" name="marketingOptional">
+              <span>[선택] 광고성 정보 수신 모두 동의</span>
+            </label>
+          </div>
+
+          <button class="btn btn--primary btn--lg auth-submit" type="submit">가입하기</button>
+          <a href="#" class="auth-switch-link" data-open-login>로그인으로 돌아가기</a>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div class="auth-toast" id="authToast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__theme" role="group" aria-label="화면 테마">
+          <span class="footer__theme-label">테마</span>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="light" aria-pressed="true">라이트</button>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="dark" aria-pressed="false">다크</button>
+        </div>
+        <p class="footer__copy">&copy; 2026 Picory. UX Design Project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+

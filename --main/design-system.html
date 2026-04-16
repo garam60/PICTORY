@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory Design System</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ds-page { padding: 84px 0 64px; }
+    .ds-section { margin-bottom: 56px; }
+    .ds-section__title { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
+    .ds-section__desc { color: var(--color-text-secondary); margin-bottom: 20px; }
+    .ds-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .ds-card { padding: 20px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+    .ds-color { height: 88px; border-radius: 12px; margin-bottom: 12px; }
+    .ds-mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.82rem; color: var(--color-text-muted); }
+    .ds-type-row { padding: 14px 0; border-bottom: 1px solid var(--color-border); }
+    .ds-type-row:last-child { border-bottom: 0; }
+    .ds-back { display: inline-flex; margin-bottom: 28px; color: var(--color-accent); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="ds-page">
+    <div class="container">
+      <a href="index.html" class="ds-back">메인으로 돌아가기</a>
+
+      <div class="section__header" style="margin-bottom: 40px;">
+        <h1 class="section__title">Picory Design System</h1>
+        <p class="section__desc">프로토타입에 사용된 색상, 타이포그래피, 컴포넌트 기준을 정리한 페이지입니다.</p>
+      </div>
+
+      <section class="ds-section">
+        <h2 class="ds-section__title">Color Palette</h2>
+        <p class="ds-section__desc">차분한 차콜 계열 바탕에 오렌지 포인트를 더해 카메라 제품 탐색 서비스의 집중도를 높였습니다.</p>
+        <div class="ds-grid">
+          <div class="ds-card">
+            <div class="ds-color" style="background:#1A1A1A;"></div>
+            <strong>Primary Dark</strong>
+            <div class="ds-mono">#1A1A1A</div>
+          </div>
+          <div class="ds-card">
+            <div class="ds-color" style="background:#2C2C2C;"></div>
+            <strong>Primary</strong>
+            <div class="ds-mono">#2C2C2C</div>
+          </div>
+          <div class="ds-card">
+            <div class="ds-color" style="background:#FF5C00;"></div>
+            <strong>Accent Orange</strong>
+            <div class="ds-mono">#FF5C00</div>
+          </div>
+          <div class="ds-card">
+            <div class="ds-color" style="background:#F7F7F8;"></div>
+            <strong>Background</strong>
+            <div class="ds-mono">#F7F7F8</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <h2 class="ds-section__title">Typography</h2>
+        <p class="ds-section__desc">Pretendard를 기본 서체로 사용해 화면 전반의 가독성과 현대적인 느낌을 유지했습니다.</p>
+        <div class="ds-card">
+          <div class="ds-type-row">
+            <div class="ds-mono">Hero Title / 2.5rem / Bold</div>
+            <div style="font-size:2rem; font-weight:700;">마음에 드는 사진 한 장이면</div>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-mono">Section Title / 2rem / Bold</div>
+            <div style="font-size:1.5rem; font-weight:700;">통합 시세 비교</div>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-mono">Body / 0.9rem / Regular</div>
+            <div style="font-size:0.95rem;">원하는 느낌의 사진을 올리면 AI가 카메라와 렌즈를 추천해 드립니다.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <h2 class="ds-section__title">Components</h2>
+        <p class="ds-section__desc">실제 서비스 화면에서 사용하는 버튼, 태그, 카드 스타일 예시입니다.</p>
+        <div class="ds-card">
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
+            <button class="btn btn--primary">기본 버튼</button>
+            <button class="btn btn--ghost">보조 버튼</button>
+            <button class="btn btn--outline">아웃라인 버튼</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+            <span class="tag tag--warm">감성 색감</span>
+            <span class="tag tag--bokeh">아웃포커싱</span>
+            <span class="tag tag--natural">자연광</span>
+          </div>
+          <div class="recommend-card card" style="max-width:360px;">
+            <div class="recommend-card__body">
+              <h3 class="recommend-card__name">Sony A7C II</h3>
+              <p class="recommend-card__lens">+ FE 35mm F1.8</p>
+              <div class="recommend-card__price">
+                <span class="price-label">신품 최저</span>
+                <span class="price-value">1,890,000원</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory - 커뮤니티</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('picory-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+</head>
+<body class="page-community">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD" />
+      </a>
+      <label class="nav__search" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="상품, 브랜드 검색">
+      </label>
+      <ul class="nav__menu">
+        <li><a href="index.html" class="nav__link">홈</a></li>
+        <li><a href="products.html" class="nav__link">상품</a></li>
+        <li><a href="recommend.html" class="nav__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="price.html" class="nav__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="checklist.html" class="nav__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="community.html" class="nav__link nav__link--active" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn btn--ghost btn--sm" id="bookmarkBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          북마크
+        </button>
+        <a href="auth.html" class="btn btn--primary btn--sm">로그인</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__list">
+      <li><a href="index.html" class="mobile-menu__link">홈</a></li>
+      <li><a href="products.html" class="mobile-menu__link">상품</a></li>
+      <li><a href="recommend.html" class="mobile-menu__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="price.html" class="mobile-menu__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="checklist.html" class="mobile-menu__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="community.html" class="mobile-menu__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="#" class="mobile-menu__link">북마크</a></li>
+    </ul>
+  </div>
+
+  <section class="section section--dark" id="community">
+    <div class="container">
+      <div class="section__header section__header--community-brand">
+        <img class="community-page-logo" src="images/camerary-community-logo.png" alt="CAMERARY" width="1200" height="200">
+        <p class="section__desc">실제 유저들이 올린 사진과 촬영 설정을 확인하세요. 광고 없는 진짜 결과물만 모았어요.</p>
+      </div>
+
+      <div class="community-actions">
+        <button class="btn btn--primary" id="uploadPostBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          사진 업로드
+        </button>
+        <button class="btn btn--ghost" id="openGlossaryBtn" style="border-color: rgba(255,255,255,0.15); color: #ccc;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          용어 사전
+        </button>
+      </div>
+
+      <div class="community-filters" role="tablist" aria-label="갤러리 주제 필터">
+        <button type="button" class="filter-chip filter-chip--active" data-community-filter="all" role="tab" aria-selected="true">전체</button>
+        <button type="button" class="filter-chip" data-community-filter="portrait" role="tab" aria-selected="false">인물</button>
+        <button type="button" class="filter-chip" data-community-filter="landscape" role="tab" aria-selected="false">풍경</button>
+        <button type="button" class="filter-chip" data-community-filter="daily" role="tab" aria-selected="false">일상</button>
+        <button type="button" class="filter-chip" data-community-filter="night" role="tab" aria-selected="false">야경</button>
+        <button type="button" class="filter-chip" data-community-filter="food" role="tab" aria-selected="false">음식</button>
+      </div>
+
+      <div class="gallery-grid" id="communityGalleryGrid">
+        <div class="gallery-card card" data-community-tags="landscape daily">
+          <div class="gallery-card__img">
+            <img class="gallery-card__photo" src="images/community-sony-a7c2-gallery.png" alt="캠퍼스 연못, 분수, 벚꽃이 보이는 풍경 사진" width="800" height="533" loading="lazy">
+            <div class="gallery-card__overlay">
+              <button type="button" class="gallery-card__camera-tag" data-products-href="products.html#trending" aria-haspopup="dialog" aria-expanded="false">Sony A7C II</button>
+            </div>
+          </div>
+          <div class="gallery-card__info">
+            <div class="gallery-card__settings" aria-label="촬영 설정">
+              <span class="setting-chip tooltip-trigger" data-tooltip="조리개(F값)입니다. 숫자가 작을수록 조리개가 넓어져 빛이 많이 들어오고, 배경이 더 흐려져 피사체가 돋보입니다(얕은 심도).">f/1.8</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="셔터 속도입니다. 1/125초는 1초의 125분의 1만큼 짧게 여는 값으로, 손떨림이나 일반적인 움직임을 막고 선명하게 담기 좋습니다.">1/125s</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="ISO는 센서 감도입니다. 400은 실내·흐린 날에도 노이즈를 크게 늘리지 않으면서 밝기를 확보하기 좋은 중간 감도입니다.">ISO 400</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="초점 거리 35mm입니다. 화각이 넓어 풍경·일상 스냅에 무난하고, 인물과 배경을 함께 담기 좋은 준광각에 가깝습니다.">35mm</span>
+            </div>
+            <div class="gallery-card__meta">
+              <span class="gallery-card__author">@SpringWalker</span>
+              <span class="gallery-card__likes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>128</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card card" data-community-tags="food daily">
+          <div class="gallery-card__img">
+            <img class="gallery-card__photo" src="images/community-fujifilm-xt5-gallery.jpg" alt="도시 식당·음식 풍경 샘플 (카메라 본체 없음)" width="1200" height="800" loading="lazy">
+            <div class="gallery-card__overlay">
+              <button type="button" class="gallery-card__camera-tag" data-products-href="products.html#emotional" aria-haspopup="dialog" aria-expanded="false">Fujifilm X-T5</button>
+            </div>
+          </div>
+          <div class="gallery-card__info">
+            <div class="gallery-card__settings" aria-label="촬영 설정">
+              <span class="setting-chip tooltip-trigger" data-tooltip="조리개(F값)입니다. F2.8은 밝은 렌즈에 비해 한 단계 더 닫혀, 실내 조명에서도 노이즈를 줄이면서 피사체를 또렷하게 담기 좋습니다.">f/2.8</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="셔터 속도입니다. 1/500초는 매우 짧게 열어 손떨림·움직임을 억제하고, 음식·인물 등을 선명하게 고정합니다.">1/500s</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="ISO는 센서 감도입니다. 200은 밝은 환경이나 약간 어두운 실내에서도 깨끗한 화질을 유지하기 좋은 낮은 감도입니다.">ISO 200</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="초점 거리 23mm(APS-C 등)입니다. 광각에 가까워 테이블·실내 풍경을 넓게 담고, 스냅에 무난한 화각입니다.">23mm</span>
+            </div>
+            <div class="gallery-card__meta">
+              <span class="gallery-card__author">@daily_joon</span>
+              <span class="gallery-card__likes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>96</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card card" data-community-tags="night daily">
+          <div class="gallery-card__img">
+            <img class="gallery-card__photo" src="images/community-canon-r6ii-gallery.jpg" alt="야간 도시 불빛 풍경 (카메라 본체 없음)" width="1200" height="800" loading="lazy">
+            <div class="gallery-card__overlay">
+              <button type="button" class="gallery-card__camera-tag" data-products-href="products.html#vlog" aria-haspopup="dialog" aria-expanded="false">Canon R6 II</button>
+            </div>
+          </div>
+          <div class="gallery-card__info">
+            <div class="gallery-card__settings" aria-label="촬영 설정">
+              <span class="setting-chip tooltip-trigger" data-tooltip="조리개(F값)입니다. F1.4는 매우 밝아 야간·실내에서 빛을 확보하고, 배경 보케가 강하게 나와 피사체가 분리됩니다.">f/1.4</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="셔터 속도입니다. 1/60초는 비교적 느린 편이라 손떨림 보정·삼각대와 함께 쓰면 야경·실내를 적당히 밝게 담기 좋습니다.">1/60s</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="ISO는 센서 감도입니다. 3200은 어두운 환경에서 밝기를 확보하기 위한 높은 감도로, 노이즈가 늘어날 수 있어 바디의 노이즈 억제 성능이 중요합니다.">ISO 3200</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="초점 거리 50mm입니다. 표준 렌즈에 가까운 시야로 인물·야경 스냅 모두 자연스럽고, 배경과의 거리감이 무난합니다.">50mm</span>
+            </div>
+            <div class="gallery-card__meta">
+              <span class="gallery-card__author">@night_walker</span>
+              <span class="gallery-card__likes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>213</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card card" data-community-tags="landscape daily">
+          <div class="gallery-card__img">
+            <img class="gallery-card__photo" src="images/community-nikon-zf-gallery.jpg" alt="산과 숲이 보이는 풍경 (카메라 본체 없음)" width="1200" height="800" loading="lazy">
+            <div class="gallery-card__overlay">
+              <button type="button" class="gallery-card__camera-tag" data-products-href="products.html#vintage" aria-haspopup="dialog" aria-expanded="false">Nikon Zf</button>
+            </div>
+          </div>
+          <div class="gallery-card__info">
+            <div class="gallery-card__settings" aria-label="촬영 설정">
+              <span class="setting-chip tooltip-trigger" data-tooltip="조리개(F값)입니다. F2.0은 밝은 편으로 실내·풍경 모두 무난하며, 적당한 배경 분리감으로 피사체를 돋보이게 합니다.">f/2.0</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="셔터 속도입니다. 1/250초는 흔들림을 억제해 풍경·스냅을 선명하게 담기 좋고, 낮은 ISO와 함께 쓰기 좋은 속도입니다.">1/250s</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="ISO는 센서 감도입니다. 100은 가장 낮은 감도로 노이즈가 거의 없고, 밝은 날 야외나 삼각대 풍경 촬영에 적합합니다.">ISO 100</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="초점 거리 40mm입니다. 표준보다 약간 광각에 가까워 풍경과 피사체의 균형이 좋고, 인물과 배경을 함께 담기 좋은 화각입니다.">40mm</span>
+            </div>
+            <div class="gallery-card__meta">
+              <span class="gallery-card__author">@cherry_bloom</span>
+              <span class="gallery-card__likes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>175</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card card" data-community-tags="portrait daily">
+          <div class="gallery-card__img">
+            <img class="gallery-card__photo" src="images/community-portrait-gallery.jpg" alt="인물 클로즈업 샘플 (카메라 본체 없음)" width="1200" height="800" loading="lazy">
+            <div class="gallery-card__overlay">
+              <button type="button" class="gallery-card__camera-tag" data-products-href="products.html#trending" aria-haspopup="dialog" aria-expanded="false">Sony α7 IV</button>
+            </div>
+          </div>
+          <div class="gallery-card__info">
+            <div class="gallery-card__settings" aria-label="촬영 설정">
+              <span class="setting-chip tooltip-trigger" data-tooltip="조리개(F값)입니다. F2.8은 인물과 배경의 분리를 적당히 주면서도 실내·실외 모두 무난하게 쓰기 좋습니다.">f/2.8</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="셔터 속도입니다. 1/200초는 미세한 움직임을 억제해 인물 표정·눈 초점을 선명하게 담기 좋습니다.">1/200s</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="ISO는 센서 감도입니다. 400은 실내 자연광·창가에서 노이즈를 크게 늘리지 않고 피부 톤을 담기 좋은 설정입니다.">ISO 400</span>
+              <span class="setting-chip tooltip-trigger" data-tooltip="초점 거리 85mm입니다. 단렌즈로 인물의 얼굴 비율이 자연스럽고, 배경을 부드럽게 눌러 주는 인물 촬영에 흔히 쓰입니다.">85mm</span>
+            </div>
+            <div class="gallery-card__meta">
+              <span class="gallery-card__author">@portrait_haru</span>
+              <span class="gallery-card__likes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>241</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tooltip" id="globalTooltip"></div>
+
+  <div id="cameraTagPopover" class="camera-tag-popover" hidden role="dialog" aria-label="상품 카탈로그 바로가기">
+    <p class="camera-tag-popover__text">상품 카탈로그에서 비슷한 기종·분위기의 제품을 찾아볼 수 있어요.</p>
+    <a class="camera-tag-popover__link btn btn--primary btn--sm" id="cameraTagPopoverLink" href="products.html">상품 페이지로 이동</a>
+  </div>
+
+  <div class="modal-overlay hidden" id="glossaryModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3>카메라 용어 사전</h3>
+        <button class="modal__close" id="closeGlossary" aria-label="닫기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="용어를 검색하세요..." id="glossarySearchInput" class="modal__search-input">
+      </div>
+      <div class="modal__body" id="glossaryBody">
+        <div class="glossary-item">
+          <h4 class="glossary-item__term">조리개 (Aperture)</h4>
+          <p class="glossary-item__desc">렌즈로 들어오는 빛의 양을 조절하는 값입니다. <strong>F값이 낮을수록</strong> 더 많은 빛을 받아 배경이 흐려지고, 피사체가 더 도드라져 보여요.</p>
+          <div class="glossary-item__visual">F1.4 배경 흐림 강함 → F16 전체적으로 선명</div>
+        </div>
+        <div class="glossary-item">
+          <h4 class="glossary-item__term">셔터스피드 (Shutter Speed)</h4>
+          <p class="glossary-item__desc">센서가 빛에 노출되는 시간입니다. <strong>빠를수록</strong> 움직임을 또렷하게 멈추고, <strong>느릴수록</strong> 빛의 궤적이나 흔들림이 표현돼요.</p>
+          <div class="glossary-item__visual">1/4000s 초고속 → 30s 장노출</div>
+        </div>
+        <div class="glossary-item">
+          <h4 class="glossary-item__term">ISO</h4>
+          <p class="glossary-item__desc">센서 감도를 뜻합니다. <strong>낮을수록</strong> 노이즈가 적고, <strong>높을수록</strong> 어두운 환경에서도 더 밝게 촬영할 수 있어요.</p>
+          <div class="glossary-item__visual">ISO 100 깨끗함 → ISO 12800 밝지만 노이즈 증가</div>
+        </div>
+        <div class="glossary-item">
+          <h4 class="glossary-item__term">풀프레임 / APS-C / M4/3</h4>
+          <p class="glossary-item__desc">센서 크기를 뜻해요. <strong>풀프레임</strong>은 화질과 표현력이 좋고, <strong>APS-C</strong>는 균형이 좋고, <strong>M4/3</strong>는 더 가볍고 컴팩트합니다.</p>
+          <div class="glossary-item__visual">풀프레임 > APS-C > M4/3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="uploadModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3>사진 업로드</h3>
+        <button class="modal__close" id="closeUploadModal" aria-label="닫기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="upload-modal-zone" id="uploadModalZone">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          <p>사진을 드래그하거나 <span class="text-accent">클릭하여 업로드</span></p>
+        </div>
+        <div class="upload-modal-form">
+          <div class="form-group">
+            <label class="form-label">카메라 기종</label>
+            <input type="text" class="form-input" placeholder="예: Sony A7C II">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">조리개</label>
+              <input type="text" class="form-input" placeholder="예: f/1.8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">셔터스피드</label>
+              <input type="text" class="form-input" placeholder="예: 1/125s">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ISO</label>
+              <input type="text" class="form-input" placeholder="예: 400">
+            </div>
+            <div class="form-group">
+              <label class="form-label">초점거리</label>
+              <input type="text" class="form-input" placeholder="예: 35mm">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">카테고리</label>
+            <div class="form-chips">
+              <button class="filter-chip" type="button">인물</button>
+              <button class="filter-chip" type="button">풍경</button>
+              <button class="filter-chip" type="button">일상</button>
+              <button class="filter-chip" type="button">야경</button>
+              <button class="filter-chip" type="button">음식</button>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg" style="width: 100%; margin-top: 8px;">업로드</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="bookmark-sidebar" id="bookmarkSidebar">
+    <div class="bookmark-sidebar__header">
+      <h3>내 북마크</h3>
+      <button class="bookmark-sidebar__close" id="closeSidebar" aria-label="닫기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="bookmark-sidebar__body" id="bookmarkBody">
+      <div class="bookmark-empty" id="bookmarkEmpty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <p>아직 북마크한 카메라가 없어요.</p>
+        <p class="text-sm text-muted">마음에 드는 카메라의 북마크 버튼을 눌러보세요.</p>
+      </div>
+      <div class="bookmark-list hidden" id="bookmarkList"></div>
+    </div>
+    <div class="bookmark-sidebar__footer hidden" id="bookmarkFooter">
+      <button class="btn btn--primary" style="width: 100%;" id="compareBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        선택한 카메라 비교하기
+      </button>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo footer__logo">
+            <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD" />
+          </a>
+          <p class="footer__tagline">카메라 탐색의 새로운 기준</p>
+        </div>
+        <div class="footer__links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">고객센터</a>
+        </div>
+        <div class="footer__theme" role="group" aria-label="화면 테마">
+          <span class="footer__theme-label">테마</span>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="light" aria-pressed="true">라이트</button>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="dark" aria-pressed="false">다크</button>
+        </div>
+        <p class="footer__copy">&copy; 2026 Picory. UX Design Project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

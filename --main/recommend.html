@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picory - AI 추천</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('picory-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+</head>
+<body class="page-recommend">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+      </a>
+      <label class="nav__search" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="상품, 브랜드 검색">
+      </label>
+      <ul class="nav__menu">
+        <li><a href="index.html" class="nav__link">홈</a></li>
+        <li><a href="products.html" class="nav__link">상품</a></li>
+        <li><a href="recommend.html" class="nav__link nav__link--active" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="price.html" class="nav__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="checklist.html" class="nav__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+        <li><a href="community.html" class="nav__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn btn--ghost btn--sm" id="bookmarkBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          북마크
+        </button>
+        <a href="auth.html" class="btn btn--primary btn--sm">로그인</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__list">
+      <li><a href="index.html" class="mobile-menu__link">홈</a></li>
+      <li><a href="products.html" class="mobile-menu__link">상품</a></li>
+      <li><a href="recommend.html" class="mobile-menu__link" data-nav-badge="recommend">AI 추천<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="price.html" class="mobile-menu__link" data-nav-badge="price">시세 비교<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="checklist.html" class="mobile-menu__link" data-nav-badge="checklist">체크리스트<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="community.html" class="mobile-menu__link" data-nav-badge="community">커뮤니티<span class="nav__link-badge" aria-hidden="true"></span></a></li>
+      <li><a href="#" class="mobile-menu__link">북마크</a></li>
+    </ul>
+  </div>
+
+  <section class="hero" id="recommend">
+    <div class="container">
+      <div class="hero__content">
+        <h1 class="hero__title">마음에 드는 사진 한 장이면<br><span class="text-accent">딱 맞는 카메라</span>를 찾아드려요</h1>
+        <p class="hero__subtitle">복잡한 스펙 비교는 그만. 원하는 느낌의 사진을 올리면 AI가 카메라와 렌즈를 추천해 드립니다.</p>
+
+        <div class="upload-zone" id="uploadZone">
+          <div class="upload-zone__idle" id="uploadIdle">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p class="upload-zone__text">여기에 사진을 드래그하거나 <span class="text-accent">클릭하여 업로드</span></p>
+            <p class="upload-zone__hint">JPG, PNG, WEBP (최대 10MB)</p>
+          </div>
+          <div class="upload-zone__loading hidden" id="uploadLoading">
+            <div class="spinner"></div>
+            <p>AI가 사진을 분석하고 있어요...</p>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section result-section hidden" id="resultSection">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">AI 분석 결과</h2>
+        <p class="section__desc">업로드한 사진과 유사한 결과물을 만들 수 있는 조합을 골라드렸어요.</p>
+      </div>
+
+      <div class="result-grid">
+        <div class="analysis-card card">
+          <div class="analysis-card__preview" id="previewImg"></div>
+          <div class="analysis-card__tags" id="analysisTags">
+            <span class="tag tag--warm">따뜻한 색감</span>
+            <span class="tag tag--bokeh">아웃포커싱</span>
+            <span class="tag tag--natural">자연광</span>
+          </div>
+        </div>
+
+        <div class="recommend-card card">
+          <div class="recommend-card__badge">Best Match</div>
+          <div class="recommend-card__img" aria-hidden="true"></div>
+          <div class="recommend-card__body">
+            <h3 class="recommend-card__name">Sony A7C II</h3>
+            <p class="recommend-card__lens">+ FE 35mm F1.8</p>
+            <div class="recommend-card__specs">
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="이미지 센서는 빛을 받아 디지털 화상으로 바꾸는 부품입니다. 크기(풀프레임·APS-C 등)에 따라 화각과 촬영감이 달라집니다.">센서<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">풀프레임</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="유효 화소 수를 말하며, 보통 ‘만 화소’로 표기합니다. 수치가 높을수록 해상도가 커지지만, 화질은 센서 크기·렌즈 등과 함께 결정됩니다.">화소<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">3300만</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="조리개 값이 작을수록 더 많은 빛을 받아 배경 흐림 효과가 강해집니다.">조리개<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">F1.8</span>
+              </div>
+            </div>
+            <div class="recommend-card__price">
+              <span class="price-label">신품 최저</span>
+              <span class="price-value">1,890,000원</span>
+            </div>
+            <div class="recommend-card__actions">
+              <a href="price.html?q=Sony+A7C+II" class="btn btn--primary">시세 비교 보기</a>
+              <button type="button" class="bookmark-add recommend-card__bookmark-btn" aria-label="북마크 추가">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="recommend-card card">
+          <div class="recommend-card__img" aria-hidden="true"></div>
+          <div class="recommend-card__body">
+            <h3 class="recommend-card__name">Fujifilm X-T5</h3>
+            <p class="recommend-card__lens">+ XF 23mm F1.4</p>
+            <div class="recommend-card__specs">
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="이미지 센서는 빛을 받아 디지털 화상으로 바꾸는 부품입니다. 크기(풀프레임·APS-C 등)에 따라 화각과 촬영감이 달라집니다.">센서<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">APS-C</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="유효 화소 수를 말하며, 보통 ‘만 화소’로 표기합니다. 수치가 높을수록 해상도가 커지지만, 화질은 센서 크기·렌즈 등과 함께 결정됩니다.">화소<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">4020만</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-item__label tooltip-trigger" data-tooltip="조리개 값이 작을수록 더 많은 빛을 받아 배경 흐림 효과가 강해집니다.">조리개<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+                <span class="spec-item__value">F1.4</span>
+              </div>
+            </div>
+            <div class="recommend-card__price">
+              <span class="price-label">신품 최저</span>
+              <span class="price-value">1,590,000원</span>
+            </div>
+            <div class="recommend-card__actions">
+              <a href="price.html?q=Fujifilm+X-T5" class="btn btn--primary">시세 비교 보기</a>
+              <button type="button" class="bookmark-add recommend-card__bookmark-btn" aria-label="북마크 추가">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bundle-section">
+        <h3 class="bundle-section__title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span class="bundle-section__title-model">Sony A7C II</span>
+          <span class="tooltip-trigger bundle-section__term" data-tooltip="본체와 함께 쓰기 좋은 액세서리를 묶어 제안한 구성입니다. 카메라·렌즈 본체는 포함되지 않을 수 있어요.">추천 번들</span>
+        </h3>
+        <div class="bundle-grid">
+          <div class="bundle-item card card--sm">
+            <div class="bundle-item__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="22" y1="10" x2="22" y2="14"/></svg></div>
+            <span class="bundle-item__name"><span class="tooltip-trigger" data-tooltip="소니 정품 리튬 이온 배터리 제품 코드입니다. 호환 기종 설명서를 확인하세요.">NP-FZ100</span> 배터리</span>
+            <span class="bundle-item__price">89,000원</span>
+          </div>
+          <div class="bundle-item card card--sm">
+            <div class="bundle-item__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+            <span class="bundle-item__name">SD카드 128GB <span class="tooltip-trigger" data-tooltip="Video Speed Class 60: 초당 약 60MB 이상의 지속 쓰기 성능을 의미합니다. 4K 촬영에 자주 쓰입니다.">V60</span></span>
+            <span class="bundle-item__price">45,000원</span>
+          </div>
+          <div class="bundle-item card card--sm">
+            <div class="bundle-item__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/></svg></div>
+            <span class="bundle-item__name"><span class="tooltip-trigger" data-tooltip="자외선(UV)를 줄여 렌즈 앞면을 보호하는 필터입니다.">UV</span> 필터 <span class="tooltip-trigger" data-tooltip="렌즈 나사 산 규격(직경). 렌즈 전면에 맞는 직경을 선택해야 합니다.">49mm</span></span>
+            <span class="bundle-item__price">25,000원</span>
+          </div>
+          <div class="bundle-item card card--sm">
+            <div class="bundle-item__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+            <span class="bundle-item__name"><span class="tooltip-trigger" data-tooltip="미국의 카메라 액세서리 브랜드. 퀵 릴리즈 스트랩 등으로 알려져 있어요.">Peak Design</span> 스트랩</span>
+            <span class="bundle-item__price">65,000원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tooltip" id="globalTooltip"></div>
+
+  <aside class="bookmark-sidebar" id="bookmarkSidebar">
+    <div class="bookmark-sidebar__header">
+      <h3>내 북마크</h3>
+      <button class="bookmark-sidebar__close" id="closeSidebar" aria-label="닫기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="bookmark-sidebar__body" id="bookmarkBody">
+      <div class="bookmark-empty" id="bookmarkEmpty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <p>아직 북마크한 카메라가 없어요.</p>
+        <p class="text-sm text-muted">마음에 드는 카메라의 북마크 버튼을 눌러보세요.</p>
+      </div>
+      <div class="bookmark-list hidden" id="bookmarkList"></div>
+    </div>
+    <div class="bookmark-sidebar__footer hidden" id="bookmarkFooter">
+      <button class="btn btn--primary" style="width: 100%;" id="compareBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        선택한 카메라 비교하기
+      </button>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo footer__logo">
+            <img class="nav__logo-image" src="images/camerad-logo.png" alt="CAMERAD">
+          </a>
+          <p class="footer__tagline">카메라 탐색의 새로운 기준</p>
+        </div>
+        <div class="footer__links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">고객센터</a>
+        </div>
+        <div class="footer__theme" role="group" aria-label="화면 테마">
+          <span class="footer__theme-label">테마</span>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="light" aria-pressed="true">라이트</button>
+          <button type="button" class="footer__theme-btn" data-theme-toggle="dark" aria-pressed="false">다크</button>
+        </div>
+        <p class="footer__copy">&copy; 2026 Picory. UX Design Project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/recommend/bridge.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
